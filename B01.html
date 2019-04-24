@@ -1,0 +1,197 @@
+<html>
+<head>
+<meta charset="UTF-8" />
+ <link rel="icon" href="https://static.jianshukeji.com/highcharts/images/favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1">	<meta name="description" content="">
+<title>Highcharts 教程 | 菜鸟教程(runoob.com)</title>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+	<script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+	<script src="https://img.hcharts.cn/highcharts/modules/data.js"></script>
+	<script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+<style type="text/css">
+	.box{
+		display: flex;
+	}
+	.container,.containera{
+		flex: 1;
+		text-align: center;
+	}
+	#datatable {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 12px;
+}
+td,th {
+    border: 1px solid #ccc;
+    padding: 4px 20px;
+}
+</style>
+</head>
+<body>
+	<div class="box">
+		<div id="container" style=" height: 400px; "></div>
+		<div id="containera" style="height:400px"></div>
+	</div>
+	<div class="boxa">
+		<div id="containerb" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+		<p>数据表格</p>
+		<table id="datatable">
+		    <thead>
+		        <tr>
+		            <th></th>
+		            <th>小张</th>
+		            <th>小潘</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr>
+		            <th>苹果</th>
+		            <td>3</td>
+		            <td>4</td>
+		        </tr>
+		        <tr>
+		            <th>梨</th>
+		            <td>2</td>
+		            <td>0</td>
+		        </tr>
+		        <tr>
+		            <th>葡萄</th>
+		            <td>5</td>
+		            <td>1</td>
+		        </tr>
+		        <tr>
+		            <th>香蕉</th>
+		            <td>1</td>
+		            <td>1</td>
+		        </tr>
+		        <tr>
+		            <th>橘子</th>
+		            <td>2</td>
+		            <td>4</td>
+		        </tr>
+		    </tbody>
+		</table>
+	</div>
+<script language="JavaScript">
+	var chart = Highcharts.chart('containera', {
+    title: {
+        text: '2014 某网站上各个浏览器的访问量占比'
+    },
+    tooltip: {
+        headerFormat: '{series.name}<br>',
+        pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true // 设置饼图是否在图例中显示
+        }
+    },
+    series: [{
+        type: 'pie',
+        name: '浏览器访问量占比',
+        data: [
+            ['Firefox',   45.0],
+            ['IE',       26.8],
+            {
+                name: 'Chrome',
+                y: 12.8,
+                sliced: true,
+                selected: true
+            },
+            ['Safari',    8.5],
+            ['Opera',     6.2],
+            ['其他',   0.7]
+        ]
+    }]
+});
+
+
+$(document).ready(function() {  
+   var chart = {
+       plotBackgroundColor: null,
+       plotBorderWidth: null,
+       plotShadow: false
+   };
+   var title = {
+      text: '2014 年各浏览器市场占有比例'   
+   };      
+   var tooltip = {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+   };
+   var plotOptions = {
+      pie: {
+         allowPointSelect: true,
+         cursor: 'pointer',
+         dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}%</b>: {point.percentage:.1f} %',
+            style: {
+               color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+            }
+         }
+      }
+   };
+   var series= [{
+      type: 'pie',
+      name: 'Browser share',
+      data: [
+         ['Firefox',   45.0],
+         ['IE',       26.8],
+         {
+            name: 'Chrome',
+            y: 12.8,
+            sliced: true,
+            selected: true
+         },
+         ['Safari',    8.5],
+         ['Opera',     6.2],
+         ['Others',   0.7]
+      ]
+   }];     
+      
+   var json = {};   
+   json.chart = chart; 
+   json.title = title;     
+   json.tooltip = tooltip;  
+   json.series = series;
+   json.plotOptions = plotOptions;
+   $('#container').highcharts(json);  
+});
+
+
+var chart = Highcharts.chart('containerb', {
+    data: {
+        table: 'datatable'
+    },
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: '从 HTML 表格中提取数据并生成图表'
+        // 该功能依赖 data.js 模块，详见https://www.hcharts.cn/docs/data-modules
+    },
+    yAxis: {
+        allowDecimals: false,
+        title: {
+            text: '个',
+            rotation: 0
+        }
+    },
+    tooltip: {
+        formatter: function () {
+            return '<b>' + this.series.name + '</b><br/>' +
+                this.point.y + ' 个' + this.point.name.toLowerCase();
+        }
+    }
+});
+</script>
+</body>
+</html>

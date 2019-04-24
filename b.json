@@ -1,0 +1,20 @@
+{
+	"series": [{
+		"new": "20",
+		"theday": "76",
+		"thatday":"85"
+	}, {
+		"new": "12",
+		"theday": "43",
+		"thatday":"84"
+	},{
+		"new": "59",
+		"theday": "98",
+		"thatday":"23"
+	},{
+		"new": "23",
+		"theday": "65",
+		"thatday":"84"
+	}],
+	"time":"12:00"
+}

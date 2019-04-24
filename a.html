@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		header {
+  border-top: 0.0266666667rem solid #EDEDED;
+  padding-bottom: 0.5866666667rem;
+  border-bottom: 0.1066666667rem solid #EFEFF4; }
+  header .title {
+    font-size: 0.48rem;
+    color: #3B3B3B;
+    text-align: center;
+    padding: 0.2666666667rem 0;
+    border-bottom: 0.0266666667rem solid #EDEDED; }
+  header .header-title {
+    display: flex;
+    padding: 0.3733333333rem 0.2666666667rem 0 0.2666666667rem; }
+    header .header-title p {
+      font-size: 0.4266666667rem;
+      color: #000;
+      flex: 1; }
+    header .header-title span {
+      font-size: 0.32rem;
+      color: #9B9B9B; }
+  header .header-detail {
+    margin-top: 0.4266666667rem;
+    display: flex; }
+    header .header-detail .header-detail-txt {
+      flex: 1;
+      padding-left: 0.2666666667rem; }
+      header .header-detail .header-detail-txt .header-detail-txta {
+        font-size: 0.32rem;
+        color: #000; }
+      header .header-detail .header-detail-txt .header-detail-txtb {
+        font-size: 0.4266666667rem;
+        color: #000;
+        padding: 0.3466666667rem 0; }
+      header .header-detail .header-detail-txt .header-detail-txta:nth-child(3) {
+        padding-bottom: 0.2133333333rem; }
+    header .header-detail .header-detail-txt:nth-child(4) {
+      border-left: 0.0266666667rem solid #a7a7a7; }
+    header .header-detail .header-detail-txt:nth-child(2) {
+      border-left: 0.0266666667rem solid #a7a7a7; }
+    header .header-detail .header-detail-txt:nth-child(3) {
+      border-left: 0.0266666667rem solid #a7a7a7; }
+
+	</style>
+	<body>
+		<header ng-app="myApp" ng-controller="siteCtrl">
+				<p class="title">示例社区</p>
+				<div class="header-title">
+					<p>新增概况</p>
+					<span>数据更新至<span id="data">{{time}}</span></span>
+				</div>
+				<div class="header-detail">
+					<div class="header-detail-txt" ng-repeat="x in names">
+						<p class="header-detail-txta">新增用户人数</p>
+						<p class="header-detail-txtb">{{x.new}}</p>
+						<p class="header-detail-txta">昨日:&nbsp;{{x.theday}}</p>
+						<p class="header-detail-txta">总量:&nbsp;{{x.thatday}}</p>
+					</div>
+				</div>
+			</header>
+	</body>
+	<script src="js/jquery-1.8.3.min.js"></script>
+	<script src="js/flexble.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	<script>
+		var app=angular.module('myApp',[]);
+		app.controller('siteCtrl',function($scope,$http){
+			$http.get("b.json")
+			.success(function(response){
+				console.log(response);
+				$scope.names=response.series;
+				$scope.time=response.time;
+			});
+		});
+	</script>
+</html>
